@@ -1,6 +1,13 @@
 " Speak text out loud
 
-let g:speech_speed = 300
+if exists("g:loaded_vimspeak") || &cp || v:version < 700
+  finish
+endif
+let g:loaded_vimspeak = 1
+
+if !exists("g:speech_speed")
+  let g:speech_speed = 300
+endif
 
 function! s:get_visual_selection()
   let [lnum1, col1] = getpos("'<")[1:2]
@@ -25,8 +32,11 @@ function! s:speak_text()
     let language = 'en'
   endif
   silent exe '! mkfifo ' . fifo
-  silent exe '! espeak -v ' . language . ' -s ' . g:speech_speed . " '" . text . "' --stdout " . 
-           \ "| mpv --quiet --cache=1024 --input=file=" . fifo . " - &> /dev/null && rm " . fifo . ' &'
+  silent exe '! espeak -v ' . language . 
+           \ ' -s ' . g:speech_speed . 
+           \ " '" . text . "' --stdout " . 
+           \ "| mpv --quiet --cache=1024 --input=file=" . fifo . 
+           \ " - &> /dev/null && rm " . fifo . ' &'
   redraw!
 endfunction
 
@@ -40,13 +50,14 @@ endfunction
 
 function! s:speak_line_number()
   let text = line('.')
-  let application = 'espeak'
   if &spelllang == "pt"
     let language = 'pt'
   else
     let language = 'en'
   endif
-  let command = '!' . application . ' -v ' . language . ' -s ' . g:speech_speed . " '" . text . "' &> /dev/null &"
+  let command = '! espeak -v ' . language . 
+              \ ' -s ' . g:speech_speed . 
+              \ " '" . text . "' &> /dev/null &"
   silent execute command
   redraw!
 endfunction
