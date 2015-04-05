@@ -1,4 +1,4 @@
-# Vimspeak
+# Vim-speak
 
 This is a series of mappings I use to make vim speak text to me. Don't expect
 much from it. You should read the plugin's code if you intend to use it, lest
