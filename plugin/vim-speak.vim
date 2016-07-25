@@ -34,6 +34,7 @@ function! s:speak_text()
   silent exe '! mkfifo ' . fifo
   silent exe '! espeak -v ' . language . 
            \ ' -s ' . g:speech_speed . 
+           \ ' --punct' .
            \ " '" . text . "' --stdout " . 
            \ "| mpv --quiet --cache=1024 --input=file=" . fifo . 
            \ " - &> /dev/null && rm " . fifo . ' &'
