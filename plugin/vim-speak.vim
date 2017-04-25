@@ -63,7 +63,7 @@ function! s:speak_line_number()
   redraw!
 endfunction
 
-vnoremap <silent> s         :<C-U>call <SID>speak_text()<CR>
+vnoremap <silent> <c-s>     :<C-U>call <SID>speak_text()<CR>
 nnoremap <silent> yp        :call <SID>command_mplayer('pause')<CR>
 nnoremap <silent> yq        :call <SID>command_mplayer('quit')<CR>
 nnoremap <silent> yg        :call <SID>command_mplayer('seek 10')<CR>
