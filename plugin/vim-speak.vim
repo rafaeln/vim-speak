@@ -37,7 +37,7 @@ function! s:speak_text()
            \ ' --punct' .
            \ ' -k1' .
            \ " '" . text . "' --stdout " . 
-           \ "| mpv --quiet --cache=1024 --input=file=" . fifo . 
+           \ "| mpv --quiet --cache=1024 --input-file=" . fifo .
            \ " - &> /dev/null && rm " . fifo . ' &'
   redraw!
 endfunction
