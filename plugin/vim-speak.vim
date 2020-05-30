@@ -53,7 +53,7 @@ endfunction
 function! s:speak_line_number()
   let text = line('.')
   if &spelllang == "pt"
-    let language = 'pt'
+    let language = 'pt-br'
   else
     let language = 'en'
   endif
